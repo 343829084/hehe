@@ -1,0 +1,30 @@
+{
+  "name": "<%=name%>",
+  "version": "0.0.1",
+  "description": "<%=description%>",
+  "main": "dispatch.js",
+  "private": true,
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node dispatch.js",
+    "pretest": "npm install",
+    "test": "make test"
+  },
+  "dependencies": {
+    "pm": "*",
+    "connect": "*",
+    "urlrouter": "*",
+    "connect-render": "*",
+    "easymysql": "*",
+    "forward": "*"
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*",
+    "jscover": "*",
+    "supertest": "*"
+  },
+  "repository": "",
+  "author": "Jackson Tian",
+  "license": "MIT"
+}

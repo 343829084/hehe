@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+var path = require('path');
+var fs = require('fs');
+var ejs = require('ejs');
+var ncp = require('ncp').ncp;
+var args = process.argv;
+
+// app_name
+var name = args[2] || 'hehe_app';
+// app_description
+var description = args[3] || 'hehe app';
+
+var folder = path.resolve(name);
+var exists = fs.existsSync(folder);
+if (!exists) {
+  fs.mkdirSync(folder, '0777');
+}
+
+var source = path.join(__dirname, '../templates');
+var copy = function (source, folder, filename, data) {
+  var output = path.join(folder, filename);
+  var input = path.join(source, filename);
+  data = data || {};
+  var tpl = fs.readFileSync(input, 'utf-8');
+  fs.writeFileSync(output, ejs.render(tpl, data), 'utf-8');
+};
+
+var data = {
+  name: name,
+  description: description
+};
+copy(source, folder, 'package.json', data);
+copy(source, folder, 'Makefile');
+copy(source, folder, 'app.js');
+copy(source, folder, 'dispatch.js');
+copy(source, folder, 'routes.js');
+copy(source, folder, 'README.md', data);
+ncp(path.join(source, 'assets'), path.join(folder, 'assets'), function () {});
+ncp(path.join(source, 'proxy'), path.join(folder, 'proxy'), function () {});
+ncp(path.join(source, 'views'), path.join(folder, 'views'), function () {});
+ncp(path.join(source, 'logs'), path.join(folder, 'logs'), function () {});
+ncp(path.join(source, 'config'), path.join(folder, 'config'), function () {});
+ncp(path.join(source, 'test'), path.join(folder, 'test'), function () {});
+ncp(path.join(source, 'controllers'), path.join(folder, 'controllers'), function () {});
