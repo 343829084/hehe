@@ -1,6 +1,6 @@
 {
   "name": "hehe",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MVC project template",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "ncp": "*",
-    "ejs": "*"
+    "ejs": "*",
+    "fs-extra": "*"
   },
   "author": "Jackson Tian",
   "license": "MIT",

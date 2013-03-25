@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var path = require('path');
 var fs = require('fs');
+var fsx = require('fs-extra');
 var ejs = require('ejs');
 var ncp = require('ncp').ncp;
 var args = process.argv;
@@ -38,7 +39,8 @@ copy(source, folder, 'README.md', data);
 ncp(path.join(source, 'assets'), path.join(folder, 'assets'), function () {});
 ncp(path.join(source, 'proxy'), path.join(folder, 'proxy'), function () {});
 ncp(path.join(source, 'views'), path.join(folder, 'views'), function () {});
-ncp(path.join(source, 'logs'), path.join(folder, 'logs'), function () {});
 ncp(path.join(source, 'config'), path.join(folder, 'config'), function () {});
 ncp(path.join(source, 'test'), path.join(folder, 'test'), function () {});
 ncp(path.join(source, 'controllers'), path.join(folder, 'controllers'), function () {});
+
+fsx.createFile(path.join(folder, 'logs/access.log'), function () {});
